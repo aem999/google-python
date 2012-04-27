@@ -1,6 +1,6 @@
 google-python
 =============
-Python is a *dynamically typed* language, that offers a very readable syntax and is often used as a scripting language.
+Python is a [dynamically typed](http://en.wikipedia.org/wiki/Type_system#Dynamic_typing) language, that offers a very readable syntax and is often used as a scripting language.
 The code is interpretted at run-time which has the advantage of flexibility but the disadvantage that syntactically
 incorrect code will only be flagged as an error when it is executed. 
 

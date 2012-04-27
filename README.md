@@ -1,8 +1,6 @@
 google-python
 =============
-Python is a [dynamically typed](http://en.wikipedia.org/wiki/Type_system#Dynamic_typing) language, that offers a very readable syntax and is often used as a scripting language.
-The code is interpretted at run-time which has the advantage of flexibility but the disadvantage that syntactically
-incorrect code will only be flagged as an error when it is executed. 
+Python is a [dynamically typed](http://en.wikipedia.org/wiki/Type_system#Dynamic_typing) language, that offers a very readable syntax and is often used as a scripting language. The code is interpreted at run-time which has the advantage of flexibility but the disadvantage that syntactically incorrect code will only be flagged as an error when it is executed. 
 
 
 Style Guide
@@ -23,8 +21,7 @@ A *module* is a Python file. A Python module can be run directly:
     
     python hello.py Bob
     
-or it can be imported and used by some other module. When a Python file is run directly, the special variable "\_\_name\_\_"
-is set to "\_\_main\_\_". Therefore, it's common to have the boilerplate:
+or it can be imported and used by some other module. When a Python file is run directly, the special variable "\_\_name\_\_" is set to "\_\_main\_\_". Therefore, it's common to have the boilerplate:
 
     if __name__ == '__main__':
         main()
@@ -36,6 +33,7 @@ Module Arguments
 ----------------
 The list `sys.argv` contains the command line arguments with `sys.argv[0]` being the program itself, `sys.argv[1]` the
 first program argument, and so on.
+
 
 Functions
 ---------
@@ -57,11 +55,38 @@ Example:
 * variables defined in the function are local to that function
 
 
-At run time, functions must be defined by the execution of a "def" before they are called. 
-It is typical to define a main() function towards the bottom of the file with the functions it calls above it.
+At run time, functions must be defined by the execution of a "def" before they are called. It is typical to define a main() function towards the bottom of the file with the functions it calls above it.
 
     def main():
         print repeat('Yay', False)      ## YayYayYay
         print repeat('Woo Hoo', True)   ## Woo HooWoo HooWoo Hoo!!!
 
 
+Imports
+-------
+Modules may import other modules to access their features. With the statement "import sys" you can import the sys module and access its definitions by their fully-qualified name, e.g. sys.exit().
+
+    import sys
+
+    # Now can refer to sys.xxx facilities
+    sys.exit(0)
+
+There is another form of the import statement that makes features in another module available by their short names:
+
+    from sys import exit
+    
+    # Now can call sys.exit using its short name
+    exit(0)
+    
+However, this form is not recommended because it makes it more difficult to determine where a function or attribute came from.
+
+
+Python Standard Library
+-----------------------
+There are many modules and packages which are bundled with a standard installation of the Python interpreter, so you don't have do anything extra to use them. These are collectively known as the "Python Standard Library." Commonly used modules/packages include:
+
+    sys  access to exit(), argv, stdin, stdout, ...
+    re   regular expressions
+    os   operating system interface, file system
+
+Documentation of all the Standard Library modules and packages can be found at http://docs.python.org/library.

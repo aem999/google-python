@@ -110,26 +110,17 @@ Strings
 -------
 Python has a built-in string class named "str" (do not use the older "string" module). Strings are immutable and literals are normally enclosed by single quotes but double quotes can also be used. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline. String literals inside triple quotes, """" or ''', can contain multiple lines of text.
 
-    []                      -- access characters in a string
-    +                       -- concatenate strings
-    str()                   -- convert other data types to strings
-    r'                      -- creates a "raw" string literal
-    s.lower()               -- returns the lowercase version of the string
-    s.upper()               -- returns the uppercase version of the string
-    s.strip()               -- returns a string with whitespace removed from the start and end
-    s.isalpha()             -- 
-    s.isdigit()             --
-    s.isspace()             -- tests if all the string chars are in the various character classes
-    s.startswith('other')   -- 
-    s.endswith('other')     -- tests if the string starts or ends with the given other string
-    s.find('other')         -- searches for a string (not a regular expression) within s, and returns the first index where it begins or -1 if not found
-    s.replace('old', 'new') -- returns a string where all occurrences of 'old' have been replaced by 'new'
-    s.split('delim')        -- returns a list of substrings separated by the given delimiter (not a regular expresion)
-    s.join(list)            -- joins the elements in the given list together using the string as the delimiter
-
+The full list of string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods  
+  
 Examples:
 
-    print hi[0]             ## 'h'
-    print 'h' + 'i'         ## 'hi'
-    print str(3.14)         ## '3.14'
-    print r'this \n that'   ## 'this \n that'
+    hello[0]                    ## 'h'
+    'h' + 'i'                   ## 'hi'
+    str(3.14)                   ## '3.14'
+    r'this \n that'             ## 'this \n that'
+    str.capitalize('abc')       ## 'Abc'
+    'abc'.capitalize()          ## 'Abc'
+    'abc'.center('abc',5)       ## ' abc '
+    'abc'.center(5,'*')         ## '*abc*'
+    
+    

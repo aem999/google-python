@@ -85,8 +85,22 @@ Python Standard Library
 -----------------------
 There are many modules and packages which are bundled with a standard installation of the Python interpreter, so you don't have do anything extra to use them. These are collectively known as the "Python Standard Library." Commonly used modules/packages include:
 
-    sys  access to exit(), argv, stdin, stdout, ...
-    re   regular expressions
-    os   operating system interface, file system
+    sys  -- access to exit(), argv, stdin, stdout, ...
+    re   -- regular expressions
+    os   -- operating system interface, file system
 
 Documentation of all the Standard Library modules and packages can be found at http://docs.python.org/library.
+
+
+help() and dir()
+----------------
+Inside the Python interpreter, the help() function pulls up documentation strings for various modules, functions, and
+methods:
+
+    help(len)         -- docs for the built in len function
+    help(sys)         -- overview docs for the sys module (must do an "import sys" first)
+    dir(sys)          -- dir() is like help() but just gives a quick list of the defined symbols
+    help(sys.exit)    -- docs for the exit() function inside of sys
+    help('xyz'.split) -- using an example of the sort of call you mean: here 'xyz'.split meaning the split() method that runs on strings
+    help(list)        -- docs for the built in "list" module
+    help(list.append) -- docs for the append() function in the list module

@@ -104,3 +104,32 @@ methods:
     help('xyz'.split) -- using an example of the sort of call you mean, here meaning the split() method on strings
     help(list)        -- docs for the built in "list" module
     help(list.append) -- docs for the append() function in the list module
+    
+
+Strings
+-------
+Python has a built-in string class named "str" (do not use the older "string" module). Strings are immutable and literals are normally enclosed by single quotes but double quotes can also be used. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline. String literals inside triple quotes, """" or ''', can contain multiple lines of text.
+
+    []                      -- access characters in a string
+    +                       -- concatenate strings
+    str()                   -- convert other data types to strings
+    r'                      -- creates a "raw" string literal
+    s.lower()               -- returns the lowercase version of the string
+    s.upper()               -- returns the uppercase version of the string
+    s.strip()               -- returns a string with whitespace removed from the start and end
+    s.isalpha()             -- 
+    s.isdigit()             --
+    s.isspace()             -- tests if all the string chars are in the various character classes
+    s.startswith('other')   -- 
+    s.endswith('other')     -- tests if the string starts or ends with the given other string
+    s.find('other')         -- searches for a string (not a regular expression) within s, and returns the first index where it begins or -1 if not found
+    s.replace('old', 'new') -- returns a string where all occurrences of 'old' have been replaced by 'new'
+    s.split('delim')        -- returns a list of substrings separated by the given delimiter (not a regular expresion)
+    s.join(list)            -- joins the elements in the given list together using the string as the delimiter
+
+Examples:
+
+    print hi[0]             ## 'h'
+    print 'h' + 'i'         ## 'hi'
+    print str(3.14)         ## '3.14'
+    print r'this \n that'   ## 'this \n that'

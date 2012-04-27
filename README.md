@@ -101,6 +101,6 @@ methods:
     help(sys)         -- overview docs for the sys module (must do an "import sys" first)
     dir(sys)          -- dir() is like help() but just gives a quick list of the defined symbols
     help(sys.exit)    -- docs for the exit() function inside of sys
-    help('xyz'.split) -- using an example of the sort of call you mean: here 'xyz'.split meaning the split() method that runs on strings
+    help('xyz'.split) -- using an example of the sort of call you mean, here meaning the split() method on strings
     help(list)        -- docs for the built in "list" module
     help(list.append) -- docs for the append() function in the list module

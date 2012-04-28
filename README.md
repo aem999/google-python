@@ -130,7 +130,7 @@ String Formatting Operator % (modulo)
     'abc %c' % 100              ## 'abc d'              %c character (accepts integer or character)
     'abc %d' % -3               ## 'abc -3'             %d signed decimal integer
     'abc %e' % -3               ## 'abc -3.000000e+00'  %e exponential notation (with lowercase 'e')
-    'abc %E' % -3               ## 'abc -3.000000E+00   %E exponential notation (with uppercase 'E')
+    'abc %E' % -3               ## 'abc -3.000000E+00'  %E exponential notation (with uppercase 'E')
     'abc %f' % 1.23             ## 'abc 1.230000'       %f floating point real number
     'abc %g' % 1.23             ## 'abc 1.23'           %g the shorter of %f and %e
     'abc %G' % 1.23             ## 'abc 1.23'           %G the shorter of %f and %E
@@ -139,8 +139,15 @@ String Formatting Operator % (modulo)
     'abc %r' % 123              ## 'abc 123'            %r string conversion (using repr())
     'abc %s' % 'def'            ## 'abc def'            %s string conversion (using str())
     'abc %x' % 123              ## 'abc 7b'             %x hexadecimal integer (lowercase letters)
-    'abc %X' % 123              ## 'abc 7B'             %X hexadecimal integer (lowercase letters)    
-
+    'abc %X' % 123              ## 'abc 7B'             %X hexadecimal integer (lowercase letters)
+    'abc %#x' % 123             ## 'abc 0x7b'           %# use alternate form
+    'abc %3d' % 3               ## 'abc   3'            %n pad from left with spaces 
+    'abc %03d' % 3              ## 'abc 003'            %0 pad from left with zeros
+    'abc %-5d' % 123            ## 'abc 123  '          %- left align
+    'abc %+5d' % 123            ## 'abc  +123'          %+ display +/- sign
+    'abc % d' % 123             ## 'abc  123'           %<SP> display a space before a positive number
+    'abc %(x)s' % {'x': 'def'}  ## 'abc def'            %(var) mapping variable (dictionary arguments)
+    'abc %3.1f' % 12.345        ## 'abc 12.3'           %m.n m is the minimum total width, n is the no. of digits to display after the decimal point (if appl.)
 
 
 

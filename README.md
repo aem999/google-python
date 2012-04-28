@@ -108,12 +108,42 @@ methods:
 
 Strings
 -------
-Strings are immutable and acan be created by enclosing characters in quotes (single, double or triple), either single quotes or double quotes.  These string literals are normally enclosed by single quotes but double quotes can also be used. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline. String literals inside triple quotes, """" or ''', can contain multiple lines of text.
+Strings are immutable and can be created by enclosing characters in either single, double or triple quotes. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline unless using tripe quotes.
 
-Python has a built-in string class named "str" (do not use the older "string" module).
+Python has a built-in string class named "str" (do not use the older "string" module) which returns a printable string representation of an object.  
 
-The full list of string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods  
-  
+String Operators:
+
+    'abc' + 'def'               ## 'abcdef'    concatenation
+    'abc' * 2                   ## 'abcabc'    repetition
+    'abc'[1]                    ## 'b'         slice
+    'abc'[-1]                   ## 'c'         slice from end
+    'abc'[0:1]                  ## 'ab'        range slice
+    'a' in 'abc'                ## True        membership
+    'd' not in 'abc'            ## 1           not in membership
+    r'abc\n'                    ## 'abc\n'     raw string (escape characters are not interpreted)
+
+
+String Formatting Operator % (modulo)
+
+    'abc %'                     ## 'abc %'              %  no conversion displays %
+    'abc %c' % 100              ## 'abc d'              %c character (accepts integer or character)
+    'abc %d' % -3               ## 'abc -3'             %d signed decimal integer
+    'abc %e' % -3               ## 'abc -3.000000e+00'  %e exponential notation (with lowercase 'e')
+    'abc %E' % -3               ## 'abc -3.000000E+00   %E exponential notation (with uppercase 'E')
+    'abc %f' % 1.23             ## 'abc 1.230000'       %f floating point real number
+    'abc %g' % 1.23             ## 'abc 1.23'           %g the shorter of %f and %e
+    'abc %G' % 1.23             ## 'abc 1.23'           %G the shorter of %f and %E
+    'abc %i' % -3               ## 'abc -3'             %i signed decimal integer
+    'abc %o' % 123              ## 'abc 173'            %o octal integer
+    'abc %r' % 123              ## 'abc 123'            %r string conversion (using repr())
+    'abc %s' % 'def'            ## 'abc def'            %s string conversion (using str())
+    'abc %x' % 123              ## 'abc 7b'             %x hexadecimal integer (lowercase letters)
+    'abc %X' % 123              ## 'abc 7B'             %X hexadecimal integer (lowercase letters)    
+
+
+
+
 Examples:
 
     hello[0]                    ## 'h'
@@ -129,5 +159,5 @@ Examples:
     'abc'.encode('base64')      ## 'YWJj\n'
     'YWJj\n'.decode('base64')   ## 'abc'
     
-    
+The full list of string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods    
     

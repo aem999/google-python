@@ -114,14 +114,14 @@ Python has a built-in string class named "str" (do not use the older "string" mo
 
 String Operators:
 
-    'abc' + 'def'               ## 'abcdef'    concatenation
-    'abc' * 2                   ## 'abcabc'    repetition
-    'abc'[1]                    ## 'b'         slice
-    'abc'[-1]                   ## 'c'         slice from end
-    'abc'[0:1]                  ## 'ab'        range slice
-    'a' in 'abc'                ## True        membership
-    'd' not in 'abc'            ## 1           not in membership
-    r'abc\n'                    ## 'abc\n'     raw string (escape characters are not interpreted)
+    +         concatenation         'abc' + 'def'               ## 'abcdef'
+    *         repetition            'abc' * 2                   ## 'abcabc'
+    [n]       slice                 'abc'[1]                    ## 'b'
+    [-n]      slice from end        'abc'[-1]                   ## 'c'
+    [n:m]     range slice           'abc'[0:1]                  ## 'ab'
+    in        membership            'a' in 'abc'                ## True
+    not in    not in membership     'd' not in 'abc'            ## True
+    r         raw string            r'abc\n'                    ## 'abc\n'   (escape characters are not interpreted)
 
 
 String Formatting Operator % (modulo)

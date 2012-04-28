@@ -108,7 +108,9 @@ methods:
 
 Strings
 -------
-Python has a built-in string class named "str" (do not use the older "string" module). Strings are immutable and literals are normally enclosed by single quotes but double quotes can also be used. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline. String literals inside triple quotes, """" or ''', can contain multiple lines of text.
+Strings are immutable and acan be created by enclosing characters in quotes (single, double or triple), either single quotes or double quotes.  These string literals are normally enclosed by single quotes but double quotes can also be used. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline. String literals inside triple quotes, """" or ''', can contain multiple lines of text.
+
+Python has a built-in string class named "str" (do not use the older "string" module).
 
 The full list of string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods  
   
@@ -122,5 +124,10 @@ Examples:
     'abc'.capitalize()          ## 'Abc'
     'abc'.center('abc',5)       ## ' abc '
     'abc'.center(5,'*')         ## '*abc*'
+    'abc'.count('a')            ## 1
+    'abc'.count('a',1,2)        ## 0
+    'abc'.encode('base64')      ## 'YWJj\n'
+    'YWJj\n'.decode('base64')   ## 'abc'
+    
     
     

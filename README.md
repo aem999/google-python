@@ -147,24 +147,38 @@ String Formatting Operator % (modulo)
     'abc %+5d' % 123            ## 'abc  +123'          %+ display +/- sign
     'abc % d' % 123             ## 'abc  123'           %<SP> display a space before a positive number
     'abc %(x)s' % {'x': 'def'}  ## 'abc def'            %(var) mapping variable (dictionary arguments)
-    'abc %3.1f' % 12.345        ## 'abc 12.3'           %m.n m is the minimum total width, n is the no. of digits to display after the decimal point (if appl.)
+    'abc %3.1f' % 12.345        ## 'abc 12.3'           %m.n m is the minimum total width
+                                                             n is the no. of digits to display after the decimal point
 
+String methods:
 
-
-Examples:
-
-    hello[0]                    ## 'h'
-    'h' + 'i'                   ## 'hi'
-    str(3.14)                   ## '3.14'
-    r'this \n that'             ## 'this \n that'
-    str.capitalize('abc')       ## 'Abc'
+    str.capitalize('abc')       ## 'Abc'                capitalize()
     'abc'.capitalize()          ## 'Abc'
-    'abc'.center('abc',5)       ## ' abc '
+    'abc'.center('abc',5)       ## ' abc '              center(width, fillchar)
     'abc'.center(5,'*')         ## '*abc*'
-    'abc'.count('a')            ## 1
+    'abc'.count('a')            ## 1                    count(sub, start, end)
     'abc'.count('a',1,2)        ## 0
-    'abc'.encode('base64')      ## 'YWJj\n'
-    'YWJj\n'.decode('base64')   ## 'abc'
-    
-The full list of string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods    
+    'YWJj\n'.decode('base64')   ## 'abc'                decode(encoding, errors)
+    'abc'.encode('base64')      ## 'YWJj\n'             encode(encoding, errors)
+    'abc'.endswith('bc')        ## True                 endswith(suffix, start, end)
+    'abc'.endswith('b',1,2)     ## True
+    '\t'.expandtabs(1)          ## ' '                  expandtabs(tabsize)
+    'abcc'.find('c')            ## 2                    find(sub, start, end)
+    'abcc'.find('c',3)          ## 3
+    'abcd'.find('e')            ## -1
+    '{0}{1}'.format('a', 'b')   ## 'abc'                format(args, kwargs)
+    '{}{}'.format('a', 'b')     ## 'abc'
+    'abcc'.index('c')           ## 2                    index(sub, start, end)                   
+    'abcc'.index('c',3)         ## 3
+    'abc123'.isalnum()          ## True                 isalnum()
+    'abc-123'.isalnum()         ## False
+    'abc'.isalpha()             ## True                 isalpha()
+    '123'.isdigit()             ## True                 isdigit()
+    'abc'.islower()             ## True                 islower()
+    '  '.isspace()              ## True                 isspace()
+    'Abc'.istitle()             ## True                 istitle()
+    'ABC'.isupper()             ## True                 isupper()
+    ','.join(['abc','def'])     ## 'abc,def'            join(iterable)
+
+Further detail for the string methods can be found at http://docs.python.org/library/stdtypes.html#string-methods    
     

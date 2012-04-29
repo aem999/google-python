@@ -36,7 +36,9 @@ def verbing(s):
 def not_bad(s):
     not_idx = s.find('not')
     bad_idx = s.find('bad')
-    if bad_idx > not_idx:
+    if not_idx != -1 and\
+       bad_idx != -1 and\
+       bad_idx > not_idx:
         result = s[:not_idx] + 'good' + s[bad_idx+3:]
     else:
         result = s
@@ -51,14 +53,14 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    a_mid = len(a)/2 + len(a)%2
-    a_front = a[0:a_mid]
-    a_back = a[a_mid:]
-    b_mid = len(b)/2 + len(b)%2
-    b_front = b[0:b_mid]
-    b_back = b[b_mid:]
-    return a_front + b_front + a_back + b_back
+    a_mid = middle(a)
+    b_mid = middle(b)
+    return a[0:a_mid] + b[0:b_mid] + a[a_mid:] + b[b_mid:]
 
+# Returns the middle position for a string
+# if
+def middle(s):
+    return len(s) / 2 + len(s) % 2
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

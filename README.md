@@ -245,3 +245,20 @@ Further info:
 
 <code>String methods:&nbsp;&nbsp;&nbsp;&nbsp;</code> <http://docs.python.org/library/stdtypes.html#string-methods><br/>
 <code>String encodings:&nbsp;&nbsp;</code> <http://docs.python.org/library/codecs.html#standard-encodings>
+
+if statement
+------------
+
+    if expression:
+       statement(s)
+    elif expression:
+       statement(s)
+    else
+       statement(s)
+
+    if expression: statement
+
+* uses indentation and spaces for grouping instead of {}
+* : ends the expression
+* no switch or case statements
+

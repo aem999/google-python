@@ -109,49 +109,59 @@ methods:
 Built-in Data Types
 -------------------
 
-    None           There is a single object with this value and it is accessed through the built-in name None.  It is used to signify the absence of a value in
-                   many situations, e.g., it is returned from functions that don’t explicitly return anything. Its truth value is false.
-    NotImplemented There is a single object with this value and it is accessed through the built-in name NotImplemented. Numeric methods and rich comparison
-                   methods may return this value if they do not implement the operation for the operands provided. (The interpreter will then try the reflected
-                   operation, or some other fallback, depending on the operator.) Its truth value is true.
-    Ellipsis       There is a single object with this value and it is accessed through the built-in name Ellipsis. It is used to indicate the presence of the ...
-                   syntax in a slice. Its truth value is true.
+    None           There is a single object with this value and it is accessed through the built-in name None.  It is
+                   used to signify the absence of a value in many situations, e.g. it is returned from functions that
+                   don’t explicitly return anything. Its truth value is false.
+    NotImplemented There is a single object with this value and it is accessed through the built-in name NotImplemented.
+                   Numeric methods and rich comparison methods may return this value if they do not implement the
+                   operation for the operands provided. The interpreter will then try the reflected operation, or some
+                   other fallback, depending on the operator. Its truth value is true.
+    Ellipsis       There is a single object with this value and it is accessed through the built-in name Ellipsis. It is
+                   used to indicate the presence of the ... syntax in a slice. Its truth value is true.
 
 Numbers:
 
-    Integral       Plain Integers - numbers in the range -2147483648 through 2147483647. (The range may be larger on machines with a larger natural word size, but
-                                    not smaller.) When the result of an operation would fall outside this range, the result is normally returned as a long integer
-                                    but in some cases, the exception OverflowError is raised instead.
+    Integral       Plain Integers - numbers in the range -2147483648 through 2147483647. The range may be larger on
+                                    machines with a larger natural word size, but not smaller. When the result of an
+                                    operation would fall outside this range, the result is normally returned as a long
+                                    integer but in some cases, the exception OverflowError is raised instead.
                    Long Integers  - numbers with an unlimited range, subject to available (virtual) memory only.
-                   Booleans       - 0 and 1 representing the truth values "False" and "True" respectively. When converted to a string, the strings "False" or "True"
-                                    are returned.
-    Real (float)   Machine-level double precision floating point numbers. The accepted range and handling of overflow depends the underlying machine architecture
-                   (and C or Java implementation).
-    Complex        Machine-level double precision floating point numbers. The real and imaginary parts of a complex number z can be retrieved through the read-only
-                   attributes z.real and z.imag. The accepted range and handling of overflow depends the underlying machine architecture (and C or Java implementation).
+                   Booleans       - 0 and 1 representing the truth values "False" and "True" respectively. When
+                                    converted to a string, the strings "False" or "True" are returned.
+    Real (float)   Machine-level double precision floating point numbers. The accepted range and handling of overflow
+                   depends the underlying machine architecture (and C or Java implementation).
+    Complex        Machine-level double precision floating point numbers. The real and imaginary parts of a complex
+                   number z can be retrieved through the read-only attributes z.real and z.imag. The accepted range and
+                   handling of overflow depends the underlying machine architecture (and C or Java implementation).
 
 Set types:
 
-These are unordered, finite sets of unique, immutable objects. As such, they cannot be indexed by any subscript. However, they can be iterated over, and the
-built-in function len() returns the number of items in a set. Common uses for sets are fast membership testing, removing duplicates from a sequence, and computing
-mathematical operations such as intersection, union, difference, and symmetric difference.
+These are unordered, finite sets of unique, immutable objects. As such, they cannot be indexed by any subscript.
+However, they can be iterated over, and the built-in function len() returns the number of items in a set. Common uses
+for sets are fast membership testing, removing duplicates from a sequence, and computing mathematical operations such as
+intersection, union, difference, and symmetric difference.
 
-Note that if two numbers compare equal (e.g. 1 and 1.0), only one of them can be contained in a set. There are currently two intrinsic set types:
+Note that if two numbers compare equal (e.g. 1 and 1.0), only one of them can be contained in a set. There are currently
+two intrinsic set types:
 
-    Sets           A mutable set created by the built-in set() constructor and can be modified afterwards by several methods, such as add().
+    Sets           A mutable set created by the built-in set() constructor and can be modified afterwards by several
+                   methods, such as add().
 
-    Frozen sets    An immutable set created by the built-in frozenset() constructor. As a frozenset is immutable and hashable, it can be used again as an element of
-                   another set, or as a dictionary key.
+    Frozen sets    An immutable set created by the built-in frozenset() constructor. As a frozenset is immutable and
+                   hashable, it can be used again as an element of another set, or as a dictionary key.
 
 Mappings:
 
-These are finite sets of objects indexed by arbitrary index sets. The subscript notation a[k] selects the item indexed by k from the mapping a. The built-in function
-len() returns the number of items in a mapping. There is currently a single intrinsic mapping type:
+These are finite sets of objects indexed by arbitrary index sets. The subscript notation a[k] selects the item indexed
+by k from the mapping a. The built-in function len() returns the number of items in a mapping. There is currently a
+single intrinsic mapping type:
 
-    Dictionaries   Finite sets of mutable objects indexed by nearly arbitrary values. The only types of values not acceptable as keys are values containing lists or
-                   dictionaries or other mutable types that are compared by value rather than by object identity. This is because the efficient implementation of
-                   dictionaries requires a key’s hash value to remain constant. If two numbers compare equal (e.g., 1 and 1.0) then they can be used interchangeably
-                   to index the same dictionary entry.
+    Dictionaries   Finite sets of mutable objects indexed by nearly arbitrary values. The only types of values not
+                   acceptable as keys are values containing lists or dictionaries or other mutable types that are
+                   compared by value rather than by object identity. This is because the efficient implementation of
+                   dictionaries requires a key’s hash value to remain constant. If two numbers compare equal
+                   (e.g. 1 and 1.0) then they can be used interchangeably to index the same dictionary entry.
+
 The extension modules *dbm*, *gdbm*, and *bsddb* provide additional examples of mapping types.
 
 Sequence Types:
@@ -160,29 +170,36 @@ Sequence types are ordered sets indexed by from 0 to n-1 and are distinguished b
 
 Immutable sequences:
 
-    Strings     Contain a sequence of characters, which are represented by strings of one item as there is no separate character type. Characters represent at least
-                8-bit bytes. The built-in functions chr() and ord() convert between characters and non-negative integers representing the byte values. Bytes with the
-                values 0-127 usually represent the corresponding ASCII values, but the interpretation of values is up to the program. The string data type is also
-                used to represent arrays of bytes, e.g., to hold data read from a file.
-    Unicode     Contains a sequence of Unicode objects of one item holding either a 16-bit or 32-bit value (the maximum value is given in sys.maxunicode, and depends
-                on how Python is configured at compile time). Surrogate pairs may be present in the Unicode object, and will be reported as two separate items.
-    Tuples      Contain a comma-separated lists of expressions surrounded by parenthethis. A tuple of one item is known as a *singleton*. An empty tuple can be
-                formed by an empty pair of parentheses.
+    Strings     Contain a sequence of characters, which are represented by strings of one item as there is no separate
+                character type. Characters represent at least 8-bit bytes. The built-in functions chr() and ord()
+                convert between characters and non-negative integers representing the byte values. Bytes with the values
+                0-127 usually represent the corresponding ASCII values, but the interpretation of values is up to the
+                program. The string data type is also used to represent arrays of bytes, e.g. to hold data read from a
+                file.
+    Unicode     Contains a sequence of Unicode objects of one item holding either a 16-bit or 32-bit value (the maximum
+                value is given in sys.maxunicode, and depends on how Python is configured at compile time). Surrogate
+                pairs may be present in the Unicode object, and will be reported as two separate items.
+    Tuples      Contain a comma-separated lists of expressions surrounded by parenthethis. A tuple of one item is known
+                as a *singleton*. An empty tuple can be formed by an empty pair of parentheses.
 
 Mutable sequences:
 
     Lists       Contain a sequence of comma-separated list of expressions surrounded by square brackets.
-    Byte Arrays Contain a sequence of integers in the range 0 to 256 and are created by the built-in bytearray() constructor. They provide the same interface and
-                functionality as immutable bytes objects except that they are mutable and hence unhashable.
+    Byte Arrays Contain a sequence of integers in the range 0 to 256 and are created by the built-in bytearray()
+                constructor. They provide the same interface and functionality as immutable bytes objects except that
+                they are mutable and hence unhashable.
 
 Note - the extension module *array* provides an additional mutable sequence type.
 
 
 Strings
 -------
-Strings are immutable and can be created by enclosing characters in either single, double or triple quotes. A string literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline unless using tripe quotes.
+Strings are immutable and can be created by enclosing characters in either single, double or triple quotes. A string
+literal can span multiple lines, but there must be a backslash \ at the end of each line to escape the newline unless
+using tripe quotes.
 
-Python has a built-in string *class* named "str" (do not use the older "string" *module*) which returns a printable string representation of an object.
+Python has a built-in string *class* named "str" (do not use the older "string" *module*) which returns a printable
+string representation of an object.
 
 String Operators:
 
@@ -322,55 +339,57 @@ Further info:
 
 Lists
 -----
-Lists are mutable and consist of a comma delimited list of items surrounded by square brackets. The items can be of different types.
+Lists are mutable and consist of a comma delimited list of items surrounded by square brackets. The items can be of
+different types.
 
 List Operators:
 
-    +                      concatenation                           [1,2,3] + [4,5,6]                  ## ['a', 'b', 'c', 'd', 'e', 'f']
-    *                      repetition                              [1,2,3] * 2                        ## [1, 2, 3, 1, 2, 3]
-    [n]                    slice                                   [1,2,3][0]                         ## 1
-    [-n]                   slice from end                          [1,2,3][-1]                        ## 3
-    [n:m]                  range slice                             [1,2,3][1:3]                       ## [2, 3]
-    in                     membership                              2 in [1,2,3]                       ## True
-    not in                 not in membership                       2 not in [1,2,3]                   ## False
-    for in                 iteration                               for x in [1, 2, 3]: print x,       ## 1 2 3
+    +                       concatenation                           [1,2,3] + [4,5,6]                  ## ['a', 'b', 'c', 'd', 'e', 'f']
+    *                       repetition                              [1,2,3] * 2                        ## [1, 2, 3, 1, 2, 3]
+    [n]                     slice                                   [1,2,3][0]                         ## 1
+    [-n]                    slice from end                          [1,2,3][-1]                        ## 3
+    [n:m]                   range slice                             [1,2,3][1:3]                       ## [2, 3]
+    in                      membership                              2 in [1,2,3]                       ## True
+    not in                  not in membership                       2 not in [1,2,3]                   ## False
+    for in                  iteration                               for x in [1, 2, 3]: print x,       ## 1 2 3
 
 List functions:
 
 The following built-in functions can be used with lists:
 
-    cmp(list1, list2)      compares elements of both lists         cmp([1,2,3], [4,5,6])              ## -1  list1 < list2
-                                                                   cmp([4,5,6], [1,2,3])              ## 1   list1 > list2
-                                                                   cmp([1,2,3], [1,2,3])              ## 0   list1 == list2
-    len(list)              number of items in list                 len([1,2,3])                       ## 3
-	max(list)              max value                               max([1,2,3])                       ## 3
-	min(list)              min value in list                       min([1,2,3])                       ## 1
-	list(seq)              converts a tuple to a list              list((1,2,3))                      ## [1, 2, 3]
-    filter(function, seq)  apply a function to filter items        filter(lambda x: x==1, [1,2,3])    ## [1]       lambda is a shorthand function declaration
-    map(function, seq)     apply a function to transform items     map(lambda x: x-1, [1,2,3])        ## [0, 1, 2]
-    reduce(function, seq)  apply a function + return single value  reduce(lambda x,y: x+y, [1,2,3])   ## 6
+    cmp(list1, list2)       compares elements of both lists         cmp([1,2,3], [4,5,6])              ## -1  list1 < list2
+                                                                    cmp([4,5,6], [1,2,3])              ## 1   list1 > list2
+                                                                    cmp([1,2,3], [1,2,3])              ## 0   list1 == list2
+    len(list)               number of items in list                 len([1,2,3])                       ## 3
+	max(list)               max value                               max([1,2,3])                       ## 3
+	min(list)               min value in list                       min([1,2,3])                       ## 1
+	list(seq)               converts a tuple to a list              list((1,2,3))                      ## [1, 2, 3]
+    filter(function, seq)   apply a function to filter items        filter(lambda x: x==1, [1,2,3])    ## [1]       lambda is a shorthand function declaration
+    map(function, seq)      apply a function to transform items     map(lambda x: x-1, [1,2,3])        ## [0, 1, 2]
+    reduce(function, seq)   apply a function + return single value  reduce(lambda x,y: x+y, [1,2,3])   ## 6
 
 List methods:
 
-The list data type contains the following methods:
+The list data type contains  the following methods:
 
-    append(object)         equivalent to a[len(a):] = object       [1,2,3].append(4)                  ## [1, 2, 3, 4]
-    count(object)          number of times object is in list       [1,2,1,3,1].count(1)               ## 3
-    extend(iterable)       equivalent to a[len(a):] = iterable     [1,2].extend([3,4])                ## [1, 2, 3, 4]
-    index(object)          return item position or throw error     [1, 2, 3].index(2)                 ## 1
-                                                                   [1, 2, 3].index(4)                 ## ValueError
-    insert(index, object)  insert item at given position           [2,3].insert(0, 1)                 ## [1, 2, 3]
-                                                                   [1,2].insert(2,3)                  ## [1, 2, 3]
-    pop(index)             remove item at position and return it   [1, 2, 3].pop()                    ## 3              list now contains [1, 2]
-                                                                   [1, 2, 3].pop(0)                   ## 1              list now contains [2, 3]
-    remove(object)         remove first match or throw error       [1,2,3].remove(2)                  ## [1, 3]
-                                                                   [1,2,3].remove(4)                  ## ValueError
-    reverse()              reverse the list, in place              [1,2,3].reverse()                  ## [3, 2, 1]
-    sort()                 sort the list, in place.                [1,3,2].sort()                     ## [1, 2, 3]
+    append(object)          equivalent to a[len(a):] = object       [1,2,3].append(4)                  ## [1, 2, 3, 4]
+    count(object)           number of times object is in list       [1,2,1,3,1].count(1)               ## 3
+    extend(iterable)        equivalent to a[len(a):] = iterable     [1,2].extend([3,4])                ## [1, 2, 3, 4]
+    index(object)           return item position or throw error     [1, 2, 3].index(2)                 ## 1
+                                                                    [1, 2, 3].index(4)                 ## ValueError
+    insert(index, object)   insert item at given position           [2,3].insert(0, 1)                 ## [1, 2, 3]
+                                                                    [1,2].insert(2,3)                  ## [1, 2, 3]
+    pop(index)              remove item at position and return it   [1, 2, 3].pop()                    ## 3              list now contains [1, 2]
+                                                                    [1, 2, 3].pop(0)                   ## 1              list now contains [2, 3]
+    remove(object)          remove first match or throw error       [1,2,3].remove(2)                  ## [1, 3]
+                                                                    [1,2,3].remove(4)                  ## ValueError
+    reverse()               reverse the list, in place              [1,2,3].reverse()                  ## [3, 2, 1]
+    sort(cmp, key, reverse) sort the list, in place.                [1,3,2].sort()                     ## [1, 2, 3]
 
 List comprehensions:
 
-List comprehensions provide a more concise way to create lists insituations where map() and filter() and/or nested loops would currently be used:
+List comprehensions provide a more concise way to create lists in situations where map() and filter() and/or nested
+loops would currently be used. The format is \[expr for var in list\]
 
     >>> print [i for i in range(10)]
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -400,12 +419,50 @@ List comprehensions provide a more concise way to create lists insituations wher
     [(2, 'Peaches'), (4, 'Bananas')]
 
 
+Tuples
+------
+Tuples are immutable and consist of a sequence of elements, surrounded by brackets such as an (x, y) co-ordinate. They
+are like lists, except they are immutable and do not change size (however, one of the contained elements could be
+mutable). Tuples are a convenient way to pass around a small, logical, fixed size bundle of values. They are usually
+input with surrounding parenthesis but can also be entered without as long as the tuple is not part of a larger
+expression.
+
+A function that needs to return multiple values can just return a tuple of the values. For example, if I wanted to have
+a list of 3-d coordinates, the natural python representation would be a list of tuples, where each tuple is size 3
+holding one (x, y, z) group. The "empty" tuple is just an empty pair of parenthesis. Accessing the elements in a tuple
+is just like a list, len(), [ ], for, in,etc. all work the same.
+
+Tuple operators:
+
+    +                      concatenation                           (1,2,3) + (4,5,6)                  ## (1, 2, 3, 4, 5, 6)
+    *                      repetition                              (1,2,3)*2                          ## (1, 2, 3, 1, 2, 3)
+    [n]                    slice                                   (1,2,3)[0]                         ## 1
+    [-n]                   slice from end                          (1,2,3)[-1]                        ## 3
+    [n:m]                  range slice                             (1,2,3)[1:3]                       ## (2, 3)
+    in                     membership                              2 in (1,2,3)                       ## True
+    not in                 not in membership                       2 not in (1,2,3)                   ## False
+    for in                 iteration                               for x in (1, 2, 3): print x,       ## 1 2 3
+
+Tuple methods:
+
+    count(object)          number of times object is in tuple      (1,2,1,3,1).count(1)               ## 3
+    index(object)          return item position or throw error     (1, 2, 3).index(2)                 ## 1
+                                                                   (1, 2, 3).index(4)                 ## ValueError
+
+Tuple cretation:
+
+    ()                     empty
+    (50,)                  singleton
+    50,                    singleton
+    (1,2,3)                tuple containing 3 integers
+    'a', 'b', 'c'          tuple containing 3 strings
+    tuple(['a','b','c'])   list to tuple ('a', 'b', 'c')
 
 
+Built-in Methods
+----------------
 
-
-
-
+to follow
 
 
 if statement

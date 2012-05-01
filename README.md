@@ -112,10 +112,12 @@ Built-in Data Types
     None           There is a single object with this value and it is accessed through the built-in name None.  It is
                    used to signify the absence of a value in many situations, e.g. it is returned from functions that
                    don’t explicitly return anything. Its truth value is false.
+
     NotImplemented There is a single object with this value and it is accessed through the built-in name NotImplemented.
                    Numeric methods and rich comparison methods may return this value if they do not implement the
                    operation for the operands provided. The interpreter will then try the reflected operation, or some
                    other fallback, depending on the operator. Its truth value is true.
+
     Ellipsis       There is a single object with this value and it is accessed through the built-in name Ellipsis. It is
                    used to indicate the presence of the ... syntax in a slice. Its truth value is true.
 
@@ -125,11 +127,14 @@ Numbers:
                                     machines with a larger natural word size, but not smaller. When the result of an
                                     operation would fall outside this range, the result is normally returned as a long
                                     integer but in some cases, the exception OverflowError is raised instead.
+
                    Long Integers  - numbers with an unlimited range, subject to available (virtual) memory only.
                    Booleans       - 0 and 1 representing the truth values "False" and "True" respectively. When
                                     converted to a string, the strings "False" or "True" are returned.
+
     Real (float)   Machine-level double precision floating point numbers. The accepted range and handling of overflow
                    depends the underlying machine architecture (and C or Java implementation).
+
     Complex        Machine-level double precision floating point numbers. The real and imaginary parts of a complex
                    number z can be retrieved through the read-only attributes z.real and z.imag. The accepted range and
                    handling of overflow depends the underlying machine architecture (and C or Java implementation).
@@ -176,15 +181,18 @@ Immutable sequences:
                 0-127 usually represent the corresponding ASCII values, but the interpretation of values is up to the
                 program. The string data type is also used to represent arrays of bytes, e.g. to hold data read from a
                 file.
+
     Unicode     Contains a sequence of Unicode objects of one item holding either a 16-bit or 32-bit value (the maximum
                 value is given in sys.maxunicode, and depends on how Python is configured at compile time). Surrogate
                 pairs may be present in the Unicode object, and will be reported as two separate items.
+
     Tuples      Contain a comma-separated lists of expressions surrounded by parenthethis. A tuple of one item is known
                 as a 'singleton'. An empty tuple can be formed by an empty pair of parentheses.
 
 Mutable sequences:
 
     Lists       Contain a sequence of comma-separated list of expressions surrounded by square brackets.
+
     Byte Arrays Contain a sequence of integers in the range 0 to 256 and are created by the built-in bytearray()
                 constructor. They provide the same interface and functionality as immutable bytes objects except that
                 they are mutable and hence unhashable.
@@ -458,6 +466,17 @@ Tuple methods:
     index(object)          return item position or throw error     (1, 2, 3).index(2)                 ## 1
                                                                    (1, 2, 3).index(4)                 ## ValueError
 
+Built-in functions:
+
+    cmp(tuple1, tuple2)    compares elements of both tuples        cmp((0, 2, 3), (1, 2, 3))          ## -1
+                                                                   cmp((1, 2, 3), (1, 2, 3))          ## 0
+                                                                   cmp((2, 2, 3), (1, 2, 3))          ## 1
+	len(tuple)             the total length of the tuple           len((1,2,3))                       ## 3
+	max(tuple)             return item with max value              max((1,2,3))                       ## 3
+	min(tuple)             returns item with min value             min((1,2,3))                       ## 1
+    tuple(seq)             convert a sequence to a tuple           tuple([1,2,3])                     ## (1, 2, 3)
+    type(tuple)            'tuple'                                 type((1,2,3))                      ## <type 'tuple'>
+
 
 Dictionaries
 ------------
@@ -467,16 +486,16 @@ use as a dictionary key.
 
 Dict creation:
 
-    {}                                 {}  ## empty
-    dict()                             {}  ## empty
-    {'one': 1, 'two': 2}               {'two': 2, 'one': 1}  ## can be in any order
-    {"one": 1, "two": 2}               {'two': 2, 'one': 1}
-    dict(one=1, two=2)                 {'two': 2, 'one': 1}
-    dict({'one': 1, 'two': 2})         {'two': 2, 'one': 1}
-    dict(zip(('one', 'two'), (1, 2)))  {'two': 2, 'one': 1}
-    dict([['one', 1], ['two', 2]])     {'two': 2, 'one': 1}
-    d = {'one':1}; d['two']=2          {'two': 2, 'one': 1}
-    dict([(x, x**2) for x in (1,2,3)]) {1: 1, 2: 4, 3: 9}    ## using list comprehension
+    {}                                 {}                 ## empty
+    dict()                             {}                 ## empty
+    {'a': 1, 'b': 2}                   {'b': 2, 'a': 1}   ## can be in any order
+    {"a": 1, "b": 2}                   {'b': 2, 'a': 1}
+    dict(a=1, b=2)                     {'b': 2, 'a': 1}
+    dict({'a': 1, 'b': 2})             {'b': 2, 'a': 1}
+    dict(zip(('a', 'b'), (1, 2)))      {'b': 2, 'a': 1}
+    dict([['a', 1], ['b', 2]])         {'b': 2, 'a': 1}
+    d = {'a':1}; d['b']=2              {'b': 2, 'a': 1}
+    dict([(x, x**2) for x in (1,2,3)]) {1: 1, 2: 4, 3: 9} ## using list comprehension
 
 Dict operators:
 
@@ -490,8 +509,8 @@ Dict operators:
 
 Dict methods:
 
-    clear()               remove all items                         {'a': 1, 'b': 1}.clear()           ## {}
-    copy()                returns a shallow copy                   {'a': 1, 'b': 1}.copy()            ## {'a': 1, 'b': 1}
+    clear()               remove all items                         {'a':1, 'b':1}.clear()             ## {}
+    copy()                returns a shallow copy                   {'a':1, 'b':1}.copy()              ## {'a': 1, 'b': 1}
     fromkeys(seq, value)  new dict with keys from seq              {}.fromkeys({'a':1, 'b':2})        ## {'a': None, 'b': None}
                                                                    {}.fromkeys({'a':1, 'b':2},1)      ## {'a': 1, 'b': 1}
     get(key, default)     returns value or default for key         {'a':1, 'b':2}.get('a')            ## 1
@@ -518,6 +537,15 @@ Dict methods:
     viewkeys              returns a view of the keys               {'a':1, 'b':2}.viewkeys()          ## dict_keys(['a', 'b'])
     viewvalues            returns a view of the values             {'a':1, 'b':2}.viewvalues()        ## dict_values([1, 2])
 
+Built-in functions:
+
+    cmp(dict1, dict2)     compares elements of both dictionaries   cmp({'a':0, 'b':2}, {'a':1, 'b':2}) ## -1
+                                                                   cmp({'a':1, 'b':2}, {'a':1, 'b':2}) ## 0
+                                                                   cmp({'a':2, 'b':2}, {'a':1, 'b':2}) ## 1
+    len(dict)             the number of items in the dictionary    len({'a':1, 'b':2})                 ## 2
+    str(dict)             string representation of a dictionary    str({'a':1, 'b':2})                 ## "{'a': 1, 'b': 2}"
+    type(variable)        'dict' for dictionary                    type({'a':1, 'b':2})                ## <type 'dict'>
+
 Formatting:
 
 The % operator can be used to substitute values from a dict into a string by name:
@@ -525,11 +553,6 @@ The % operator can be used to substitute values from a dict into a string by nam
     map={'type':'cars', 'count':2}
     print "I can see %(count)d %(type)s" % map                     # I can see 2 cars
 
-
-Built-in Methods
-----------------
-
-to follow
 
 
 if statement
@@ -547,3 +570,129 @@ if statement
 * uses indentation and spaces for grouping instead of {}
 * : ends the expression
 * no switch or case statements
+
+
+Files
+-----
+
+File objects can be created using the built-in *open()* function:
+
+    f = open("hello.txt")
+    try:
+        for line in f:
+            print line
+    finally:
+        f.close()
+
+or in Python 2.6 and later:
+
+    with open("hello.txt") as f:
+        for line in f:
+            print line
+
+
+Attributes:
+
+    closed    Read-only. Returns true if the file is closed. May not be available on all file-like objects.
+
+    encoding  Read-only. Returns the encoding that this file uses. When Unicode strings are written to a file, they will
+              be converted to byte strings using this encoding. In addition, when the file is connected to a terminal,
+              the attribute gives the encoding that the terminal is likely to use (that information might be incorrect).
+              May not be present on all file-like objects. It may also be None, in which case the file uses the system
+              default encoding for converting Unicode strings.
+
+    errors    The Unicode error handler used along with the encoding.
+
+    mode      Read-only. The I/O mode for the file. If the file was created using the open() built-in function, this
+              will be the value of the mode parameter. May not be available on all file-like objects.
+
+    name      Read-only. If the file object was created using open(), the name of the file. Otherwise, some string that
+              indicates the source of the file object, of the form <...>. May not be present on all file-like objects.
+
+    newlines  Read-only. If Python was built with universal newlines enabled (the default) this read-only attribute
+              exists, and for files opened in universal newline read mode it keeps track of the types of newlines
+              encountered while reading the file. The values it can take are '\r', '\n', '\r\n', None (unknown, no
+              newlines read yet) or a tuple containing all the newline types seen, to indicate that multiple newline
+              conventions were encountered. For files not opened in universal newline read mode the value of this
+              attribute will be None.
+
+    softspace Boolean that indicates whether a space character needs to be printed before another value when using
+              the print statement. Classes that are trying to simulate a file object should also have a writable
+              softspace attribute, which should be initialized to zero. This will be automatic for most classes
+              implemented in Python (care may be needed for objects that override attribute access); types
+              implemented in C will have to provide a writable softspace attribute.
+
+File object methods:
+
+    close()             Close the file. Any operation which requires that the file be open will raise a ValueError after the
+                        file has been closed. Calling close() more than once is allowed.
+
+    flush()             Flush the internal buffer. This does not necessarily write the file’s data to disk. Use flush()
+                        followed by os.fsync() to ensure this behavior.
+
+    fileno()            Returns the integer “file descriptor” that is used by the underlying implementation to request I/O
+                        operations from the operating system. This can be useful for other, lower level interfaces that use
+                        file descriptors, such as the fcntl module or os.read().
+
+    isatty()            Returns True if the file is connected to a tty(-like) device, else False.
+
+    next()              A file object is its own iterator, for example iter(f) returns f (unless f is closed). When a file
+                        is used as an iterator, typically in a for loop (for example, for line in f: print line), the next()
+                        method is called repeatedly. This method returns the next input line, or raises StopIteration when
+                        EOF is hit when the file is open for reading (behavior is undefined when the file is open for
+                        writing). In order to make a for loop the most efficient way of looping over the lines of a file,
+                        the next() method uses a hidden read-ahead buffer. As a consequence of using a read-ahead buffer,
+                        combining next() with other file methods (like readline()) does not work right. However, using seek()
+                        to reposition the file to an absolute position will flush the read-ahead buffer.
+
+    read(size)          Read at most size bytes from the file (less if the read hits EOF before obtaining size bytes). If
+                        the size argument is negative or omitted, read all data until EOF is reached. The bytes are returned
+                        as a string object. An empty string is returned when EOF is encountered immediately. (For certain
+                        files, like ttys, it makes sense to continue reading after an EOF is hit.) Note that when in
+                        non-blocking mode, less data than was requested may be returned, even if no size parameter was given.
+
+    readline(size)      Read one entire line from the file. A trailing newline character is kept in the string (but may
+                        be absent when a file ends with an incomplete line). [6] If the size argument is present and
+                        non-negative, it is a maximum byte count (including the trailing newline) and an incomplete line
+                        may be returned. When size is not 0, an empty string is returned only when EOF is encountered
+                        immediately.
+
+    readlines(sizehint) Read until EOF using readline() and return a list containing the lines thus read. If the
+                        optional sizehint argument is present, instead of reading up to EOF, whole lines totalling
+                        approximately sizehint bytes (possibly after rounding up to an internal buffer size) are
+                        read. Objects implementing a file-like interface may choose to ignore sizehint if it cannot
+                        be implemented, or cannot be implemented efficiently.
+
+    xreadlines()        Deprecated, use 'for line in file' instead.
+
+    seek(offset,whence) Set the file’s current position. The whence argument is optional and defaults to os.SEEK_SET or
+                        0 (absolute file positioning); other values are os.SEEK_CUR or 1 (seek relative to the current
+                        position) and os.SEEK_END or 2 (seek relative to the file’s end). There is no return value. Not
+                        all file objects are seekable.
+
+    tell()              Return the file’s current position. Note that on Windows, tell() can return illegal values
+                        (after an fgets()) when reading files with Unix-style line-endings. Use binary mode ('rb') to
+                        circumvent this problem.
+
+    truncate(size)      Truncate the file’s size. If the optional size argument is present, the file is truncated to
+                        (at most) that size. The size defaults to the current position. The current file position is not
+                        changed. Note that if a specified size exceeds the file’s current size, the result is
+                        platform-dependent: possibilities include that the file may remain unchanged, increase to the
+                        specified size as if zero-filled, or increase to the specified size with undefined new content.
+                        Availability: Windows, many Unix variants.
+
+    write(str)          Write a string to the file. There is no return value. Due to buffering, the string may not
+                        actually show up in the file until the flush() or close() method is called.
+
+    writelines(seq)     Write a sequence of strings to the file. The sequence can be any iterable object producing
+                        strings, typically a list of strings. There is no return value. The name is intended to match
+                        readlines(); writelines() does not add line separators.
+
+
+Built-in Functions
+------------------
+
+open(name, mode, buffering)
+---------------------------
+Opens a file
+

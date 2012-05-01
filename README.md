@@ -159,8 +159,8 @@ single intrinsic mapping type:
     Dictionaries   Finite sets of mutable objects indexed by nearly arbitrary values. The only types of values not
                    acceptable as keys are values containing lists or dictionaries or other mutable types that are
                    compared by value rather than by object identity. This is because the efficient implementation of
-                   dictionaries requires a key’s hash value to remain constant. If two numbers compare equal
-                   (e.g. 1 and 1.0) then they can be used interchangeably to index the same dictionary entry.
+                   dictionaries requires a key’s hash value to remain constant. If two numbers compare equal (e.g. 1 and
+                   1.0) then they can be used interchangeably to index the same dictionary entry.
 
 The extension modules *dbm*, *gdbm*, and *bsddb* provide additional examples of mapping types.
 
@@ -180,7 +180,7 @@ Immutable sequences:
                 value is given in sys.maxunicode, and depends on how Python is configured at compile time). Surrogate
                 pairs may be present in the Unicode object, and will be reported as two separate items.
     Tuples      Contain a comma-separated lists of expressions surrounded by parenthethis. A tuple of one item is known
-                as a *singleton*. An empty tuple can be formed by an empty pair of parentheses.
+                as a 'singleton'. An empty tuple can be formed by an empty pair of parentheses.
 
 Mutable sequences:
 
@@ -379,8 +379,8 @@ The list data type contains  the following methods:
                                                                     [1, 2, 3].index(4)                 ## ValueError
     insert(index, object)   insert item at given position           [2,3].insert(0, 1)                 ## [1, 2, 3]
                                                                     [1,2].insert(2,3)                  ## [1, 2, 3]
-    pop(index)              remove item at position and return it   [1, 2, 3].pop()                    ## 3              list now contains [1, 2]
-                                                                    [1, 2, 3].pop(0)                   ## 1              list now contains [2, 3]
+    pop(index)              remove item at position and return it   [1, 2, 3].pop()                    ## 3             list now contains [1, 2]
+                                                                    [1, 2, 3].pop(0)                   ## 1             list now contains [2, 3]
     remove(object)          remove first match or throw error       [1,2,3].remove(2)                  ## [1, 3]
                                                                     [1,2,3].remove(4)                  ## ValueError
     reverse()               reverse the list, in place              [1,2,3].reverse()                  ## [3, 2, 1]
@@ -432,6 +432,15 @@ a list of 3-d coordinates, the natural python representation would be a list of 
 holding one (x, y, z) group. The "empty" tuple is just an empty pair of parenthesis. Accessing the elements in a tuple
 is just like a list, len(), [ ], for, in,etc. all work the same.
 
+Tuple creation:
+
+    ()                     empty
+    (50,)                  singleton
+    50,                    singleton
+    (1,2,3)                tuple containing 3 integers
+    'a', 'b', 'c'          tuple containing 3 strings
+    tuple(['a','b','c'])   list to tuple ('a', 'b', 'c')
+
 Tuple operators:
 
     +                      concatenation                           (1,2,3) + (4,5,6)                  ## (1, 2, 3, 4, 5, 6)
@@ -449,14 +458,72 @@ Tuple methods:
     index(object)          return item position or throw error     (1, 2, 3).index(2)                 ## 1
                                                                    (1, 2, 3).index(4)                 ## ValueError
 
-Tuple cretation:
 
-    ()                     empty
-    (50,)                  singleton
-    50,                    singleton
-    (1,2,3)                tuple containing 3 integers
-    'a', 'b', 'c'          tuple containing 3 strings
-    tuple(['a','b','c'])   list to tuple ('a', 'b', 'c')
+Dictionaries
+------------
+A *dict* is an unordered set of *key/value* pairs, with the requirement that the keys are unique and immutable. Hence,
+strings and integers can be used as keys as can tuples as long as they only contain immutable data, but lists cannot be
+use as a dictionary key.
+
+Dict creation:
+
+    {}                                 {}  ## empty
+    dict()                             {}  ## empty
+    {'one': 1, 'two': 2}               {'two': 2, 'one': 1}  ## can be in any order
+    {"one": 1, "two": 2}               {'two': 2, 'one': 1}
+    dict(one=1, two=2)                 {'two': 2, 'one': 1}
+    dict({'one': 1, 'two': 2})         {'two': 2, 'one': 1}
+    dict(zip(('one', 'two'), (1, 2)))  {'two': 2, 'one': 1}
+    dict([['one', 1], ['two', 2]])     {'two': 2, 'one': 1}
+    d = {'one':1}; d['two']=2          {'two': 2, 'one': 1}
+    dict([(x, x**2) for x in (1,2,3)]) {1: 1, 2: 4, 3: 9}    ## using list comprehension
+
+Dict operators:
+
+    [n]                    retrieve value for key                  {'a':1, 'b':2}['a']                ## 1
+    in                     membership                              'a' in {'a':1, 'b':2}              ## True
+    not in                 not in membership                       'b' not in {'a':1, 'b':2}          ## False
+                                                                   not 'b' in {'a':1, 'b':2}          ## False
+    for in                 iteration                               for x in {'a':1, 'b':2}: print x,  ## a b
+    del                    deletion                                del {'a':1, 'b':2}['b']            ## {'a':1}
+                                                                   del mydict                         ## del dict object
+
+Dict methods:
+
+    clear()               remove all items                         {'a': 1, 'b': 1}.clear()           ## {}
+    copy()                returns a shallow copy                   {'a': 1, 'b': 1}.copy()            ## {'a': 1, 'b': 1}
+    fromkeys(seq, value)  new dict with keys from seq              {}.fromkeys({'a':1, 'b':2})        ## {'a': None, 'b': None}
+                                                                   {}.fromkeys({'a':1, 'b':2},1)      ## {'a': 1, 'b': 1}
+    get(key, default)     returns value or default for key         {'a':1, 'b':2}.get('a')            ## 1
+                                                                   {'a':1, 'b':2}.get('c')            ## None
+                                                                   {'a':1, 'b':2}.get('c',0)          ## 0
+    has_key(key)          deprecated - use 'key in ' instead       'a' in {'a':1, 'b':2}              ## True
+    items()               returns a copy of all (key, value) pairs {'a':1, 'b':2}.items()             ## [('a', 1), ('b', 2)]
+    iteritems()           iterate over the (key, value) pairs      {'a':1, 'b':2}.iteritems()         ## itemiterator
+    iterkeys()            iterate over the keys                    {'a':1, 'b':2}.iterkeys()          ## keyiterator
+    itervalues()          iterate over the values                  {'a':1, 'b':2}.itervalues()        ## valueiterator
+    keys()                returns a copy of all keys               {'a':1, 'b':2}.keys()              ## ['a', 'b']
+    pop(key, default)     removes key/value and returns value      {'a':1, 'b':2}.pop('a')            ## 1               dict now contains {'b':2}
+                                                                   {'a':1, 'b':2}.pop('c')            ## KeyError
+                                                                   {'a':1, 'b':2}.pop('c',0)          ## 0
+    popitem()             removes and return a (key, value) pair   {'c':1, 'a':1, 'b':2}.popitem()    ## ('a', 1)
+                                                                   {}.popitem()                       ## KeyError
+    setdefault(key, def)  return value else set and return default {'a':1, 'b':2}.setdefault('a')     ## 1
+                                                                   {'a':1, 'b':2}.setdefault('c')     ## None
+                                                                   {'a':1, 'b':2}.setdefault('c',0)   ## 0
+    update(other)         update with dictionary/iterable          {'a':1, 'b':2}.update({'c':3})     ## {'a': 1, 'c': 3, 'b': 2}
+                                                                   {'a':1, 'b':2}.update(c=3)         ## {'a': 1, 'c': 3, 'b': 2}
+    values                returns a copy of all values             {'a':1, 'b':2}.values()            ## [1, 2]
+    viewitems             returns a view of the items              {'a':1, 'b':2}.viewitems()         ## dict_items([('a', 1), ('b', 2)])
+    viewkeys              returns a view of the keys               {'a':1, 'b':2}.viewkeys()          ## dict_keys(['a', 'b'])
+    viewvalues            returns a view of the values             {'a':1, 'b':2}.viewvalues()        ## dict_values([1, 2])
+
+Formatting:
+
+The % operator can be used to substitute values from a dict into a string by name:
+
+    map={'type':'cars', 'count':2}
+    print "I can see %(count)d %(type)s" % map                     # I can see 2 cars
 
 
 Built-in Methods

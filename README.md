@@ -689,10 +689,181 @@ File object methods:
                         readlines(); writelines() does not add line separators.
 
 
+Regular Expressions
+-------------------
+The "re" module provides Perl-like regular expression support:
+
+The *match* and *search* functions attempt to match a regex pattern to a string with optional flags. They both return
+*None* if there is no match or a [MatchObject] (http://docs.python.org/library/re.html#re.MatchObject) in the case of a
+match. The *findall* function returns pattern matches as a list of strings and the *sub* function is used :
+
+    re.match(pattern, string, flags=0)              # matches at the beginning of the string
+    re.search(pattern, string, flags=0)             # matches anywhere in the string
+    re.findall(patten, string, flags=0)             # returns all matches as a list of strings or tuples if using groups
+    re.sub(pattern, repl, string, count=0, flags=0) # retuns a new string with all occurrences of the pattern with repl
+                                                    # (unless count is supplied)
+
+where:
+
+    pattern	  the regular expression to be matched
+    string	  the string to be searched to match the pattern
+    flags	  an optional modifier to control various aspects of matching
+
+multiple flags can be specified using bitwise OR (|):
+
+    re.I	  case-insensitive matching.
+    re.L	  interpret words according to the current locale. Affects the alphabetic group (\w and \W), as well as
+              word boundary behavior (\b and \B).
+    re.M	  makes $ match the end of a line (not just the end of the string) and makes ^ match the start of any line
+              (not just the start of the string).
+    re.S	  makes a period (dot) match any character, including a newline.
+    re.U	  interpret letters according to the Unicode character set. This flag affects the behavior of \w, \W, \b, \B
+    re.X	  permits "cuter" regular expression syntax. It ignores whitespace (except inside a set [] or when escaped
+              by a backslash), and treats unescaped # as a comment marker.
+
+
+Regular-expression patterns:
+<br/>
+<br/>
+All characters match themselves except for control characters, (+ ? . * ^ $ ( ) [ ] { } | \).<br/>
+A control character can be eacaped by preceding it with a backslash. The following table lists the regular expression
+syntax that is available in Python:
+
+    ^           Matches beginning of line
+    $	        Matches end of line
+    .	        Matches any single character except newline. Using m option allows it to match newline as well
+    [...]	    Matches any single character in brackets
+    [^...]	    Matches any single character not in brackets
+    a|b  	    Matches either a or b
+    \w	        Matches word characters [a-zA-Z0-9_]
+    \W	        Matches nonword characters
+    \s	        Matches whitespace [\t\n\r\f]
+    \S	        Matches non whitespace
+    \d	        Matches digits [0-9]
+    \D	        Matches nondigits
+    \A	        Matches beginning of string
+    \Z	        Matches end of string. If a newline exists, it matches just before newline
+    \z	        Matches end of string
+    \G	        Matches point where last match finished
+    \b	        Matches word boundaries when outside brackets. Matches backspace (0x08) when inside brackets
+    \B	        Matches nonword boundaries
+    \n, \t,     Matches newlines, carriage returns, tabs, etc.
+    \1...\9	    Matches nth grouped subexpression
+    \10	        Matches nth grouped subexpression if it matched already. Otherwise refers to the octal representation of
+                a character code
+    *	        Matches 0 or more occurrences of the preceding expression
+    +	        Matches 1 or more occurrence of the preceding expression
+    ?	        Matches 0 or 1 occurrence of the preceding expression
+    {n}	        Matches exactly n number of occurrences of preceding expression
+    {n,}	    Matches n or more occurrences of preceding expression
+    {n, m}      Matches at least n and at most m occurrences of preceding expression
+    (re)	    Groups regular expressions and remembers matched text
+    (?imx)	    Temporarily toggles on i, m, or x options within a regular expression. If in parentheses, only that
+                is affected
+    (?-imx)	    Temporarily toggles off i, m, or x options within a regular expression. If in parentheses, only that
+                area is affected
+    (?: re)	    Groups regular expressions without remembering matched text
+    (?imx: re)	Temporarily toggles on i, m, or x options within parentheses
+    (?-imx: re)	Temporarily toggles off i, m, or x options within parentheses
+    (?#...)	    Comment
+    (?= re)	    Specifies position using a pattern. Doesn't have a range
+    (?! re)	    Specifies position using pattern negation. Doesn't have a range
+    (?> re)	    Matches independent pattern without backtracking
+    \           Escape following character so it is not treated as special
+
+
+The basic rules of regular expression search for a pattern within a string are:<br/>
+  * the search proceeds through the string from start to end, stopping at the first match found<br/>
+  * all of the pattern must be matched, but not all of the string<br/>
+  * if match = re.search(pat, str) is successful, match is not None and match.group() returns the matching text<br/>
+
+Character Examples:
+
+    re.search(r'Python', 'Python').group()                 ## 'python'        Match 'Python'
+    re.search(r'[Pp]ython', 'python').group()              ## 'python'        Match 'Python' or 'python'
+    re.search(r'[aeiou]', 'python').group()                ## 'o'             Match any vowel
+    re.search(r'[0-9]', 'python2.7').group()               ## '2'             Match any digit
+    re.search(r'[a-z]', 'Python2.7').group()               ## 'y'             Match any lower case ASCII char
+    re.search(r'[A-Z]', 'Python2.7').group()               ## 'P'             Match any upper case ASCII char
+    re.search(r'[a-zA-Z0-9]', 'Python2.7').group()         ## 'P'             Match any letter or digit
+    re.search(r'[^A-Z]', 'Python2.7').group()              ## 'y'             Match anything other than an upper case char
+    re.search(r'[^0-9]', '2.7Python').group()              ## '.'	          Match anything other than a digit
+
+Special Character Examples:
+
+    re.search(r'.', '\n\nPython').group()                  ## 'P'             Match any character except newline
+    re.search(r'\d', 'python2.7').group()                  ## '2'             Match a digit [0-9]
+    re.search(r'\D', 'python2.7').group()                  ## 'p'             Match a nondigit [^0-9]
+    re.search(r'\s', 'python 2.7').group()                 ## ' '             Match a whitespace character [ \t\r\n\f]
+    re.search(r'\S', 'python 2.7').group()                 ## 'p'             Match nonwhitespace: [^ \t\r\n\f]
+    re.search(r'\w', 'Python2.7').group()                  ## 'P'             Match a single word character: [A-Za-z0-9_]
+    re.search(r'\W', 'Python2.7').group()                  ## '.'             Match a nonword character: [^A-Za-z0-9_]
+
+Repetition Examples:
+
+    re.search(r'python2.7?', 'python2.').group()           ## 'python2.'      Match 'python2.' and 0 or 1 '7' chars
+    re.search(r'python2.7?', 'python2.777').group()        ## 'python2.7'     Match 'python2.' and 0 or 1 '7' chars
+    re.search(r'python2.7*', 'python2.777').group()        ## 'python2.777'   Match 'python2.' and 0 or more '7' chars
+    re.search(r'python2.7+', 'python2.777').group()        ## 'python2.777'   Match 'python2.' and 1 or more '7' chars
+    re.search(r'python2.7+', 'python2.')                   ## None            Match 'python2.' and 1 or more '7' chars
+    re.search(r'[\w.-]+@[\w.]+', 'a-b.c@d.com').group()    ## 'a-b.c@d.com'   Simple email address match
+    re.search(r'\d{3}', 'python2.789').group()             ## '789'           Match exactly 3 digits
+    re.search(r'\d{1,}', 'python2.789').group()            ## '2'             Match 1 or more digits
+    re.search(r'\d{1,3}', 'python2.789').group()           ## '2'             Match 1, 2 or 3 digits
+    re.search(r'\d{1,3}', 'python2789').group()            ## '278'           Match 1, 2 or 3 digits
+
+Greedy Repetition Examples:
+
+    re.search(r'python2.*', 'python2.3232').group()        ## 'python2.3232'  Match all trailing '2' chars
+
+Nongreedy Repetition Examples:
+
+    re.search(r'python2.*?', 'python2.3232').group()       ## 'python2'       Stop at first trailing non '2' char
+
+Grouping Examples:
+
+    re.search(r'(python)(\d+.\d+)', 'python2.78').group()                               ## 'python2.789'
+    re.search(r'(python)(\d+.\d+)', 'python2.78').group(1)                              ## 'python'
+    re.search(r'(python)(\d+.\d+)', 'python2.78').group(2)                              ## '2.789'
+    re.search(r'(?P<lang>python)(?P<version>\d+.\d+)', 'python2.78').group('lang')      ## 'python'
+    re.search(r'(?P<lang>python)(?P<version>\d+.\d+)', 'python2.78').group('version')   ## '2.78'
+
+Backreference Examples:
+
+    re.search(r'(\w+)\s+\1', 'a the the b').group()        ## 'the the'       Find duplicate words
+    re.search(r'(\w+)\s+\1', 'a the thh b').group()        ## None
+
+Alternate Examples:
+
+    re.search(r'python|ruby', 'python').group()            ## 'python'        Match "python" or "ruby"
+    re.search(r'python(2.7|3.0)', 'python3.0').group()     ## 'python3.0'     Matches 'python2.7' or 'python3.0'
+    re.search(r'python(!+|\?)', 'python!!!').group()       ## 'python!!!'     Matches one or more ! or one ?
+    re.search(r'python(!+|\?)', 'python???').group()       ## 'python?'
+
+Anchor Examples:
+
+    re.search(r'^python', 'python').group()                ## 'python'        Match at start of string
+    re.search(r'^python', '\npython')                      ## None            Does not match at start of line
+    re.search(r'^python', '\npython', re.M).group()        ## 'python'        Match at start of line
+    re.search(r'python$', 'is python').group()             ## 'python'        Match at end of string
+    re.search(r'python$', 'python\nabc').group()           ## 'python'        Does not match at end of line
+    re.search(r'python$', 'python\nabc', re.M).group()     ## 'python'        Match at end of line
+    re.search(r'\Apython', 'python abc').group()           ## 'python'        Match at start of string
+    re.search(r'python\Z', 'abc python').group()           ## 'python'        Match at end of string
+    re.search(r'\bpython\b', ', python.').group()          ## 'python'        Match at a word boundary
+    re.search(r'python\B', 'pythonista').group()           ## 'python'        Match at a non-word boundary
+    re.search(r'python\B', 'python')                       ## None            Does not match for standalone word
+    re.search(r'python(?=2)', 'python2').group()           ## 'python'        Match if followed by a '2'
+    re.search(r'python(?!2)', 'python2')                   ## None            Match if not follwed by a '2'
+
+Special parentheses syntax:
+
+    re.search(r'python(?#comment)', 'python2').group()     ## 'python'        Coment is ignored
+    re.search(r'(?i)python', 'PythoN2').group()            ## 'PythoN'        Case insensitive search (instead of re.I)
+
+
 Built-in Functions
-------------------
+==================
 
 open(name, mode, buffering)
 ---------------------------
-Opens a file
-

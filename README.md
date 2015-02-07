@@ -1,6 +1,8 @@
 google-python
 =============
-Python is a [dynamically typed](http://en.wikipedia.org/wiki/Type_system#Dynamic_typing) language, that offers a very readable syntax and is often used as a scripting language. The code is interpreted at run-time which has the advantage of flexibility but the disadvantage that syntactically incorrect code will only be flagged as an error when it is executed.
+Python is a [dynamically typed](http://en.wikipedia.org/wiki/Type_system#Dynamic_typing) language, that offers a very
+readable syntax and is often used as a scripting language. The code is interpreted at run-time which has the advantage
+of flexibility but the disadvantage that syntactically incorrect code will only be flagged as an error when it is executed.
 
 
 Style Guide
@@ -21,7 +23,8 @@ A *module* is a Python file. A Python module can be run directly:
 
     python hello.py Bob
 
-or it can be imported and used by some other module. When a Python file is run directly, the special variable "\_\_name\_\_" is set to "\_\_main\_\_". Therefore, it's common to have the boilerplate:
+or it can be imported and used by some other module. When a Python file is run directly, the special variable
+"\_\_name\_\_" is set to "\_\_main\_\_". Therefore, it's common to have the boilerplate:
 
     if __name__ == '__main__':
         main()
@@ -51,11 +54,13 @@ Example:
 
 * "def" defines the function with its parameters within parentheses
 * function code must be indented at the same level
-* the first line of a function can be a "docstring" (documentation string) that describes what the function does (may span multiple lines)
+* the first line of a function can be a "docstring" (documentation string) that describes what the function does (may
+span multiple lines)
 * variables defined in the function are local to that function
 
 
-At run time, functions must be defined by the execution of a "def" before they are called. It is typical to define a main() function towards the bottom of the file with the functions it calls above it.
+At run time, functions must be defined by the execution of a "def" before they are called. It is typical to define a
+main() function towards the bottom of the file with the functions it calls above it.
 
     def main():
         print repeat('Yay', False)      ## YayYayYay
@@ -64,7 +69,8 @@ At run time, functions must be defined by the execution of a "def" before they a
 
 Imports
 -------
-Modules may import other modules to access their features. With the statement "import sys" you can import the sys module and access its definitions by their fully-qualified name, e.g. sys.exit().
+Modules may import other modules to access their features. With the statement "import sys" you can import the sys module
+and access its definitions by their fully-qualified name, e.g. sys.exit().
 
     import sys
 
@@ -252,7 +258,7 @@ String methods:
 
     capitalize()                                             str.capitalize('abc')        ## 'Abc'
                                                              'abc'.capitalize()           ## 'Abc'
-    center(width, fillchar)                                  'abc'.center('abc',5)        ## ' abc '
+    center(width, fillchar)                                  'abc'.center(5)              ## ' abc '
                                                              'abc'.center(5,'*')          ## '*abc*'
     count(sub, start, end)                                   'abc'.count('a')             ## 1
                                                              'abc'.count('a',1,2)         ## 0
@@ -265,13 +271,13 @@ String methods:
     find(sub, start, end)          returns first match pos   'abcc'.find('c')             ## 2
                                                              'abcc'.find('c',3)           ## 3
                                                              'abcc'.find('d')             ## -1
-    format(args, kwargs)           preferred over % formats  '{0}{1}'.format('a','b')     ## 'abc'
-                                                             '{}{}'.format('a','b')       ## 'abc'
+    format(args, kwargs)           preferred over % formats  '{0}{1}'.format('a','b','c') ## 'ab'
+                                                             '{}{}'.format('a','b','c')   ## 'ab'
     index(sub, start, end)         find + raises ValueError  'abcc'.index('c')            ## 2
                                                              'abcc'.index('c',3)          ## 3
                                                              'abcc'.index('d')            ## ValueError: substring not found
     isalnum()                      alphanumeric              'abc123'.isalnum()           ## True
-    isalpha()                      alpahbetic                'abc'.isalpha()              ## True
+    isalpha()                      alphabetic                'abc'.isalpha()              ## True
     isdigit()                      numeric                   '123'.isdigit()              ## True
     islower()                      lower case                'abc'.islower()              ## True
     isspace()                      space(s)                  '  '.isspace()               ## True

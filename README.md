@@ -17,6 +17,17 @@ function should all have the same indentation, set in from the indentation of th
 group has a different indentation, it is flagged as a syntax error.
 
 
+Underscores
+-----------
+The following conventions for leading/trailing underscores are used:
+    
+    single leading underscore	e.g. _foo		weak 'internal' indicator. These objects are not imported by 'import' statements
+    single trailing underscore	e.g. class_		convention to avoid conflict with a Python keyword
+    double leading underscore	e.g. __foo		invokes name mangling to prevent object being overridden by subclass e.g. _MyClass__foo
+	double leading/trailing		e.g. __init__	Python reserved attributes. Never create new ones, only use as documented
+    							
+    
+
 Modules
 -------
 A *module* is a Python file. A Python module can be run directly:

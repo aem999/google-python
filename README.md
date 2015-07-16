@@ -203,7 +203,7 @@ Immutable sequences:
                 value is given in sys.maxunicode, and depends on how Python is configured at compile time). Surrogate
                 pairs may be present in the Unicode object, and will be reported as two separate items.
 
-    Tuples      Contain a comma-separated lists of expressions surrounded by parenthethis. A tuple of one item is known
+    Tuples      Contain a comma-separated lists of expressions surrounded by parentheses. A tuple of one item is known
                 as a 'singleton'. An empty tuple can be formed by an empty pair of parentheses.
 
 Mutable sequences:
